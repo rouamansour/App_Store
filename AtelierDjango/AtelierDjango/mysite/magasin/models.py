@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+
 # Create your models here.
 class Produit(models.Model):
     TYPE_CHOICES=[('fr','Frais'),('cs','Conserve'),('em','emballé')]
@@ -13,7 +14,8 @@ class Produit(models.Model):
         #associations avec les autres classes
     categorie= models.ForeignKey('Categorie',on_delete=models.CASCADE,null=True)
     fournisseur=models.ForeignKey('Fournisseur', on_delete=models.CASCADE,null=True)
-    
+
+#   chaque model herite class Django.db.models.Model
 class Categorie(models.Model):
     name= models.CharField(max_length=50,default="Alimentaire")
 
@@ -23,6 +25,7 @@ class Categorie(models.Model):
 
     def __str__(self):
         return self.name 
+    
 class Fournisseur(models.Model):
     nom=models.CharField(max_length=255)
     adresse=models.TextField()
@@ -46,4 +49,3 @@ class Commande(models.Model):
         return str(self.dateCde)+"\n"+str(self.produits)+"\n Total: "+str(self.totalCde)
     from django.db import models
 
-# Create your models here.
